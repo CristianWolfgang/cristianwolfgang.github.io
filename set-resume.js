@@ -4,7 +4,7 @@ const setResume = ()=>{
     document.addEventListener("click",e=>{
         if(e.target.matches(".btn-lang")){
             e.target.textContent = lang.toUpperCase();
-            aDownload.href = "/resume-"+lang+".pdf";
+            aDownload.href = "/public/resume-"+lang+".pdf";
             lang = lang==="es"?"en":"es";
 
         }
