@@ -1,0 +1,40 @@
+.bg-html{
+    background-color: #f06529;
+}
+.bg-css{
+    background-color: #2965f1;
+}
+.bg-js,
+.bg-react,
+.bg-bootstrap,
+.bg-vite{
+    background-color: #000000d4;
+}
+.bg-php{
+    background-color: #484C89;
+    font-style: italic;
+}
+
+.bg-git,
+.bg-mysql{
+    background-color: white;
+    color: black;
+}
+.bg-git{
+    font-size: 1.2rem;
+}
+.bg-mysql{
+    color: #000000d4;
+}
+.php-icon{
+    width: 2.8rem;
+}
+.mysql-icon{
+    width: 4.5rem;
+}
+.html-icon{
+    width: 2rem;
+}
+.git-icon{
+    width:2.3rem;
+}
