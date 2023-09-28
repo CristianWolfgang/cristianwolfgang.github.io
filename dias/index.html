@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html{
+            font-family: sans-serif;
+        }
+        body{
+            width:500px;
+            margin:0 auto;
+            margin-top: 1rem;
+            background: #e9e2e2;
+        }
+        .form__container{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .input__container{
+            width: 25%;
+            
+        }
+        .input__title{
+            text-align: center;
+            font-weight: bolder;
+        }
+        #day,
+        #year,
+        #month{
+            width: 100%;
+            height: 1.2rem;
+        }
+        .calc-btn{
+            width: 25%;
+            height: 1.5rem;
+            margin:1rem auto 0;
+            display: block;
+        }
+        #result{
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        #days{
+            color: red;
+        }
+        #luck,
+        .green-color{
+            color: green;
+        }
+        .social-media,
+        .explanation{
+            position: absolute;
+            top:40rem;
+            width: 500px;
+        }
+        .link__container{
+            text-align: center;
+            margin-top:2rem;
+            font-size: 1.5rem;
+        }
+        .explanation{
+            top:25rem;
+            
+        }
+        .explanation p{
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h2>Cuantos dias has vivido?</h2>
+    <h3>introduce tu fecha de nacimiento</h3>    
+    <div class="form__container">
+        <div class="input__container">
+            <div class="input__title">DÍA</div>
+            <div class="input">
+                <input type="number" id="day" min="1" max="31">
+            </div>
+        </div>
+        <div class="input__container">
+            <div class="input__title">MÉS</div>
+            <div class="input">
+                <select id="month"></select>
+            </div>
+        </div>
+        <div class="input__container">
+            <div class="input__title">AÑO</div>
+            <div class="input">            
+                <input type="number" min="1970" id="year">
+            </div>
+        </div>
+    </div>
+    <button class="calc-btn" id="calc">Calcular</button>
+    <br>
+    <h3 id="result">?</h3>
+    <div class="explanation">
+        <h3>Que te asegura que esto es cierto?</h3>
+        <p class="">
+        Se puede obtener los milisegundos ocurridos desde enero 1 de 1970 hasta la fecha que quieras. Al poner tu fecha de nacimiento, 
+        obtenemos los milisegundos ocurridos junto a los milisegundos de este preciso momento. Por lo que: si restamos ambas cantidades, hallamos 
+        la cantidad de tiempo (en milisegundos) transcurridos entre ambas fechas, solo hay que convertirlos a 
+        segundos y estos a minutos y estos a dias.
+        </p>
+    </div>
+    
+    <div class="social-media">
+        <div class="link__container"><a href="https://www.instagram.com/cristian.dev01/" class="link">Creado por @cristian.dev01</a></div>
+        <div class="link__container"><a href="https://linktr.ee/cristiandev" class="link">Link.tree</a></div>
+    </div>
+    <template id="template">
+        <option class="option"></option>
+    </template>
+<script>
+    const getDiasVividos = function(fecha){
+        //mm/dd/yyyy
+        fecha = new Date(fecha);
+        const hoy = new Date(),
+        milisegundosFecha = fecha.getTime(),
+        milisegundosHoy = hoy.getTime(),
+        dif = milisegundosHoy - milisegundosFecha,
+        dias = Math.floor(dif / (1000*60*60*24));
+        return dias;
+    },
+    calcBtn = document.getElementById("calc"),
+    months = "enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre".split(",").map(str=>str.toLocaleUpperCase()),
+    fragment = document.createDocumentFragment(),
+    template = document.getElementById("template"),
+    monthSelect = document.getElementById("month");
+    months.forEach((month,index)=>{
+        const clone = template.content.cloneNode(true);
+
+        clone.querySelector(".option").textContent=month;
+        clone.querySelector(".option").value=index+1;
+        fragment.appendChild(clone);
+    });
+    monthSelect.appendChild(fragment);
+    calcBtn.onclick=e=>{
+        const day = document.getElementById("day").value,
+        month = document.getElementById("month").value,
+        year = document.getElementById("year").value,
+        date = `${month}/${day}/${year}`,
+        days = getDiasVividos(date),
+        result = document.getElementById("result");
+        if(day && month && year){
+
+            const calc = 36500-days;
+            result.innerHTML=`Has vivido 
+            <span id="days">${days}</span> dias.
+            <br>
+            <div>suponiendo que vayas a vivir 100 años (36500 días). Te quedan <span class="green-color">${calc} días</span>.</div> 
+            <div id="luck">SUERTE!</div>`
+    
+        }
+    };
+
+</script>
+</body>
+</html>
